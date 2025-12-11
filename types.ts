@@ -7,9 +7,11 @@ export interface Transaction {
   clean_merchant?: string;
   amount: number;
   category: string;
-  source: 'Discovery' | 'Absa' | 'Capitec' | 'Amex';
+  source: string; // Changed from union to string to support "Absa Debit", "Absa Credit" etc.
+  type?: 'Income' | 'Expense'; // Added to match CSV
   is_recurring?: boolean;
   budget_cap?: number;
+  notes?: string;
 }
 
 export interface CategorySummary {
@@ -71,10 +73,13 @@ export interface DietPlan {
 }
 
 export enum TabView {
-  DASHBOARD = 'DASHBOARD',
-  WALLET = 'WALLET',
-  PARTNER_MATRIX = 'PARTNER_MATRIX',
+  COMMAND_CENTER = 'COMMAND_CENTER',
+  ANALYTICS = 'ANALYTICS',
+  BUDGET_INSIGHTS = 'BUDGET_INSIGHTS',
+  MASTER_LEDGER = 'MASTER_LEDGER',
+  PARTNER_STRATEGY = 'PARTNER_STRATEGY',
   DEBT_MANAGER = 'DEBT_MANAGER',
+  NUTRITION_PROTOCOL = 'NUTRITION_PROTOCOL',
   CONCIERGE = 'CONCIERGE',
-  NUTRITION = 'NUTRITION'
+  SETTINGS = 'SETTINGS'
 }

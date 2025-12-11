@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Skeleton Key</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-      body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+      body { 
+        font-family: 'JetBrains Mono', monospace; 
+        background-color: #1A1C19; 
+        color: #E3D5CA; 
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Merriweather', serif;
+      }
       /* Custom Scrollbar */
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #1e293b; }
-      ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-      ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #1A1C19; }
+      ::-webkit-scrollbar-thumb { background: #2C2E2B; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #D4A373; }
       
       /* Animations */
       @keyframes fadeIn {
@@ -22,15 +31,29 @@
       .animate-fade-in {
         animation: fadeIn 0.4s ease-out forwards;
       }
+      
+      /* Skeleton Loading Animation */
+      .skeleton {
+        background: linear-gradient(90deg, #2C2E2B 25%, #3A3C39 50%, #2C2E2B 75%);
+        background-size: 200% 100%;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
-    "@google/genai": "https://esm.sh/@google/genai@^1.32.0"
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react": "https://esm.sh/react@18.2.0",
+    "recharts": "https://esm.sh/recharts@2.12.0?external=react,react-dom",
+    "@google/genai": "https://esm.sh/@google/genai@^1.32.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.263.1"
   }
 }
 </script>
