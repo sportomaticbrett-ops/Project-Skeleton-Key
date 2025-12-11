@@ -27,11 +27,11 @@ export const ConciergeAgent: React.FC = () => {
         
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         const response = await ai.models.generateContent({
-            model: 'gemini-3-pro-preview', // Stronger model for "Analysis"
+            model: 'gemini-1.5-pro', // Using Pro for better document analysis
             contents: {
                 parts: [
                     { inlineData: { mimeType: file.type, data: base64Data } },
-                    { text: "Analyze this insurance schedule. Extract: Vehicle, Premium, Excess. Compare to South African market averages for 2025. Is this a good deal? Output JSON: { vehicle, premium, excess, verdict, recommendation }" }
+                    { text: "Analyze this insurance/financial document. Extract: Vehicle/Asset details, Premium, Excess/Fees. Compare to South African market averages for 2025. Is this a good deal? Output JSON: { vehicle, premium, excess, verdict, recommendation }" }
                 ]
             },
             config: { responseMimeType: "application/json" }
@@ -46,7 +46,7 @@ export const ConciergeAgent: React.FC = () => {
 
     } catch (e) {
         console.error(e);
-        setResult({ verdict: "Error analyzing document. Please upload a clear image." });
+        setResult({ verdict: "Error analyzing document. Please ensure it is a clear PDF or Image." });
         setLoading(false);
     }
   };
@@ -104,12 +104,12 @@ export const ConciergeAgent: React.FC = () => {
                   </div>
                   <div>
                       <h2 className="text-xl font-bold text-white">Policy Analyzer</h2>
-                      <p className="text-slate-400 text-sm">Upload your insurance schedule. The Agent will benchmark it against market rates.</p>
+                      <p className="text-slate-400 text-sm">Upload your insurance schedule (PDF or Image). The Agent will benchmark it against market rates.</p>
                   </div>
               </div>
 
               <div className="border-2 border-dashed border-slate-700 rounded-xl p-8 text-center hover:border-blue-500/50 transition-colors">
-                  <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" id="file-upload" />
+                  <input type="file" accept="image/*,.pdf" onChange={handleFileUpload} className="hidden" id="file-upload" />
                   <label htmlFor="file-upload" className="cursor-pointer">
                       <div className="text-slate-300 font-bold mb-2">
                           {file ? file.name : "Drop PDF or Image here"}

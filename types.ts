@@ -7,9 +7,9 @@ export interface Transaction {
   clean_merchant?: string;
   amount: number;
   category: string;
-  source: 'Discovery' | 'Absa';
+  source: 'Discovery' | 'Absa' | 'Capitec' | 'Amex';
   is_recurring?: boolean;
-  budget_cap?: number; // For the Ledger view
+  budget_cap?: number;
 }
 
 export interface CategorySummary {
@@ -23,6 +23,46 @@ export interface Budget {
   limit: number;
 }
 
+export interface Asset {
+  id: string;
+  name: string;
+  value: number;
+  type: 'Investment' | 'Vehicle' | 'Property';
+}
+
+export interface Liability {
+  id: string;
+  name: string;
+  value: number;
+  interestRate: number;
+  minPayment: number;
+}
+
+export interface GroceryItem {
+  id: string;
+  name: string;
+  price: number;
+  macros: string; // e.g. "P:20g C:0g F:5g"
+  category: 'Protein' | 'Carb' | 'Fat' | 'Veg' | 'Other' | 'Meal';
+}
+
+export interface Meal {
+  id: string;
+  name: string;
+  price: number;
+  macros: string;
+  ingredients: string[];
+}
+
+export interface PartnerStrategy {
+  category: string;
+  partner: string;
+  card: string;
+  secondary_action?: string;
+  benefit: string;
+  rationale: string;
+}
+
 export interface DietPlan {
   id: string;
   name: string;
@@ -30,22 +70,11 @@ export interface DietPlan {
   budget_weekly: number;
 }
 
-export interface ShoppingItem {
-  name: string;
-  price: number;
-  category: string;
-  swap_suggestion?: {
-    name: string;
-    price: number;
-  };
-}
-
 export enum TabView {
   DASHBOARD = 'DASHBOARD',
   WALLET = 'WALLET',
-  FORENSIC = 'FORENSIC',
-  POINTS_STRATEGY = 'POINTS_STRATEGY',
-  BUDGET_TOOL = 'BUDGET_TOOL',
+  PARTNER_MATRIX = 'PARTNER_MATRIX',
+  DEBT_MANAGER = 'DEBT_MANAGER',
   CONCIERGE = 'CONCIERGE',
-  CHECKERS = 'CHECKERS'
+  NUTRITION = 'NUTRITION'
 }
